@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NumberBarn Blog – Phone Number Tips, News & Guides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #144b6e;
+      --navy-dark: #11364e;
+      --blue:      #63a1c7;
+      --orange:    #F7941E;
+      --gray:      #535e66;
+      --light:     #f5f7fa;
+      --white:     #ffffff;
+      --border:    #e3e8ee;
+      --radius:    12px;
+    }
+
+    body { font-family: 'Inter', sans-serif; color: var(--gray); background: var(--white); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── TOP BAR ── */
+    .topbar { background: var(--navy-dark); color: #a8c8e0; font-size: 12px; text-align: center; padding: 9px 24px; letter-spacing: .3px; }
+    .topbar a { color: var(--orange); font-weight: 600; }
+
+    /* ── NAV ── */
+    header { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    nav { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo img { height: 43px; width: auto; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { padding: 7px 14px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--gray); transition: background .15s, color .15s; }
+    .nav-links a:hover { background: var(--light); color: var(--navy); }
+    .nav-links a.active { color: var(--navy); font-weight: 700; }
+    .nav-cta { background: var(--orange) !important; color: var(--white) !important; font-weight: 700 !important; padding: 8px 20px !important; border-radius: 8px !important; }
+    .nav-cta:hover { opacity: .88; }
+    .nav-search { background: none; border: none; cursor: pointer; padding: 8px; color: var(--gray); display: flex; align-items: center; }
+    .nav-search:hover { color: var(--navy); }
+
+    /* ── HERO ── */
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #1b6696 100%); padding: 60px 24px; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .hero-tag { display: inline-block; background: var(--orange); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 18px; }
+    .hero h1 { font-size: clamp(26px, 3.2vw, 40px); font-weight: 800; color: var(--white); line-height: 1.2; letter-spacing: -.8px; margin-bottom: 16px; }
+    .hero p { color: #a8cde0; font-size: 16px; margin-bottom: 28px; max-width: 480px; line-height: 1.65; }
+    .hero-meta { display: flex; align-items: center; gap: 12px; color: #7ab3cf; font-size: 13px; }
+    .hero-meta .avatar { width: 38px; height: 38px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(255,255,255,.25); flex-shrink: 0; }
+    .hero-meta .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-meta strong { color: #d0e9f5; }
+    .read-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 14px; padding: 12px 24px; border-radius: 10px; margin-bottom: 28px; transition: opacity .15s; }
+    .read-btn:hover { opacity: .88; }
+    .hero-img { border-radius: 16px; overflow: hidden; aspect-ratio: 16/10; position: relative; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── CATEGORY FILTER ── */
+    .filter-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 24px; }
+    .filter-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 6px; overflow-x: auto; padding: 14px 0; scrollbar-width: none; }
+    .filter-inner::-webkit-scrollbar { display: none; }
+    .filter-btn { white-space: nowrap; padding: 7px 18px; border-radius: 20px; font-size: 13px; font-weight: 500; color: var(--gray); border: 1.5px solid var(--border); background: var(--white); cursor: pointer; transition: all .15s; font-family: inherit; }
+    .filter-btn:hover, .filter-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    /* ── MAIN LAYOUT ── */
+    .main-wrap { max-width: 1200px; margin: 0 auto; padding: 48px 24px 64px; display: grid; grid-template-columns: 1fr 320px; gap: 48px; }
+
+    /* ── SECTION LABEL ── */
+    .section-label { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--navy); margin-bottom: 28px; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ── POST GRID ── */
+    .post-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .post-card { border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; background: var(--white); transition: box-shadow .2s, transform .2s; display: flex; flex-direction: column; }
+    .post-card:hover { box-shadow: 0 8px 28px rgba(20,75,110,.11); transform: translateY(-3px); }
+    .post-card-thumb { aspect-ratio: 16/9; overflow: hidden; position: relative; background: var(--light); }
+    .post-card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
+    .post-card:hover .post-card-thumb img { transform: scale(1.04); }
+    .post-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .cat-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .9px; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
+    .cat-general   { background: #e8f4fd; color: #1561a0; }
+    .cat-askpig    { background: #fce8f3; color: #c0147a; }
+    .cat-bynumbers { background: #e8eafd; color: #3040c8; }
+    .cat-featured  { background: #eaf7ed; color: #1a8a3a; }
+    .post-card h3 { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.38; margin-bottom: 8px; flex: 1; }
+    .post-card h3 a:hover { color: var(--orange); }
+    .post-excerpt { font-size: 13px; color: var(--gray); margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .post-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--border); gap: 8px; }
+    .author-chip { display: flex; align-items: center; gap: 8px; }
+    .author-av { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+    .author-av img { width: 100%; height: 100%; object-fit: cover; }
+    .author-av-i { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #fff; flex-shrink: 0; background: var(--blue); }
+    .author-name { font-size: 12px; font-weight: 600; color: var(--navy); }
+    .post-date { font-size: 11px; color: #9ca7b0; }
+    .read-time { font-size: 11px; color: #9ca7b0; white-space: nowrap; }
+
+    /* Wide card */
+    .post-card-wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1.3fr 1fr; }
+    .post-card-wide .post-card-thumb { aspect-ratio: unset; min-height: 230px; }
+    .post-card-wide .post-card-body { padding: 28px; }
+    .post-card-wide h3 { font-size: 19px; }
+
+    /* Load more */
+    .load-more-wrap { text-align: center; margin-top: 40px; }
+    .load-more-btn { display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--navy); color: var(--navy); font-weight: 700; font-size: 14px; padding: 11px 28px; border-radius: 10px; transition: all .15s; font-family: inherit; }
+    .load-more-btn:hover { background: var(--navy); color: #fff; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 28px; }
+    .sidebar-widget { border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+    .widget-head { background: var(--navy); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 13px 20px; }
+    .widget-body { padding: 20px; }
+    .search-box { display: flex; border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .search-box input { flex: 1; border: none; outline: none; padding: 10px 14px; font-size: 14px; font-family: inherit; color: var(--navy); }
+    .search-box button { background: var(--orange); border: none; padding: 0 16px; cursor: pointer; color: #fff; }
+    .popular-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+    .popular-item { display: flex; gap: 12px; align-items: flex-start; }
+    .popular-num { font-size: 22px; font-weight: 800; color: var(--border); line-height: 1; flex-shrink: 0; min-width: 28px; }
+    .popular-item h4 { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.4; margin-bottom: 3px; }
+    .popular-item h4 a:hover { color: var(--orange); }
+    .popular-item span { font-size: 11px; color: #9ca7b0; }
+    .newsletter-widget { background: linear-gradient(135deg, var(--navy), #1e6a96); border: none; }
+    .newsletter-widget .widget-head { background: transparent; border-bottom: 1px solid rgba(255,255,255,.15); }
+    .newsletter-widget .widget-body { padding: 24px 20px; }
+    .newsletter-widget p { color: #a8cde0; font-size: 13px; margin-bottom: 16px; line-height: 1.6; }
+    .nl-input { width: 100%; padding: 10px 14px; border-radius: 8px; border: none; font-size: 14px; font-family: inherit; margin-bottom: 10px; outline: none; }
+    .nl-btn { width: 100%; background: var(--orange); color: #fff; font-weight: 700; font-size: 14px; padding: 11px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; transition: opacity .15s; }
+    .nl-btn:hover { opacity: .88; }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag-pill { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; color: var(--navy); background: var(--light); border: 1px solid var(--border); transition: all .15s; }
+    .tag-pill:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    /* ── MEET THE AUTHORS ── */
+    .authors-section { background: var(--light); padding: 64px 24px; border-top: 1px solid var(--border); }
+    .authors-inner { max-width: 1200px; margin: 0 auto; }
+    .authors-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
+    .authors-header h2 { font-size: clamp(22px, 2.5vw, 30px); font-weight: 800; color: var(--navy); letter-spacing: -.5px; }
+    .authors-header p { color: var(--gray); font-size: 15px; margin-top: 8px; max-width: 560px; margin-bottom: 40px; }
+    .authors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .author-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 28px 24px; text-align: center; transition: box-shadow .2s, transform .2s; }
+    .author-card:hover { box-shadow: 0 8px 28px rgba(20,75,110,.10); transform: translateY(-3px); }
+    .author-card-photo { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; margin: 0 auto 16px; border: 3px solid var(--border); }
+    .author-card-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .author-card h3 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .author-card .author-role { font-size: 12px; color: var(--orange); font-weight: 600; margin-bottom: 12px; }
+    .author-card p { font-size: 12px; color: var(--gray); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 16px; }
+    .view-posts { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; color: var(--navy); transition: color .15s; }
+    .view-posts:hover { color: var(--orange); }
+
+    /* ── CTA BANNER ── */
+    .banner-cta { background: linear-gradient(135deg, #1b6696 0%, var(--navy) 100%); padding: 64px 24px; text-align: center; }
+    .banner-cta h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 800; color: #fff; letter-spacing: -.5px; margin-bottom: 12px; }
+    .banner-cta p { color: #a8cde0; font-size: 16px; margin-bottom: 28px; }
+    .banner-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 15px; padding: 14px 32px; border-radius: 10px; transition: opacity .15s; }
+    .banner-btn:hover { opacity: .88; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy); color: #7ab3cf; padding: 52px 24px 28px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 28px; }
+    .footer-logo img { height: 30px; width: auto; margin-bottom: 16px; }
+    .footer-brand p { font-size: 13px; line-height: 1.75; }
+    .footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #fff; margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-col a { font-size: 13px; color: #7ab3cf; transition: color .15s; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; font-size: 12px; flex-wrap: wrap; gap: 12px; color: #5a8eaa; }
+    .footer-bottom a { color: #7ab3cf; margin-left: 16px; }
+    .footer-bottom a:hover { color: var(--orange); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .main-wrap { grid-template-columns: 1fr; }
+      .sidebar { display: grid; grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .authors-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-img { display: none; }
+      .post-grid { grid-template-columns: 1fr; }
+      .post-card-wide { grid-template-columns: 1fr; }
+      .sidebar { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .footer-top { grid-template-columns: 1fr; }
+      .authors-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    }
+    @media (max-width: 480px) {
+      .authors-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    New to NumberBarn? <a href="https://www.numberbarn.com">Get your perfect number today &rarr;</a>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo-light.png" alt="NumberBarn Blog" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">All Posts</a></li>
+        <li><a href="#">Number Tips</a></li>
+        <li><a href="#">VoIP & Tech</a></li>
+        <li><a href="#">Business</a></li>
+        <li><a href="#">Guides</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="https://www.numberbarn.com" class="nav-cta">Get a Number</a></li>
+      </ul>
+      <button class="nav-search" aria-label="Search">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <!-- HERO / FEATURED POST -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-tag">Featured</span>
+        <h1>Chicago Area Codes: History, Neighborhoods & Local Number Guide</h1>
+        <p>Chicago is a city where neighborhoods feel like small towns, historic streets tell long stories, and yep, people still get oddly protective about their area codes.</p>
+        <a href="post.html" class="read-btn">
+          Read Article
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div class="hero-meta">
+          <div class="avatar">
+            <img src="https://secure.gravatar.com/avatar/0751d8b501a2246e8c3ed1813b282cd5?s=80&d=retro&r=g" alt="Mariana Camacho" />
+          </div>
+          <div>
+            <strong>Mariana Camacho</strong> &nbsp;·&nbsp; March 12, 2026 &nbsp;·&nbsp; 6 min read
+          </div>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="https://www.numberbarn.com/blog/wp-content/uploads/2026/03/chicago-illinois-usa-on-lake-michigan-at-dawn-610x610.jpg" alt="Chicago at dawn" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY FILTER -->
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Number Tips</button>
+      <button class="filter-btn">VoIP & Tech</button>
+      <button class="filter-btn">Business</button>
+      <button class="filter-btn">Guides</button>
+      <button class="filter-btn">News</button>
+      <button class="filter-btn">Ask the Pig</button>
+      <button class="filter-btn">By the Numbers</button>
+      <button class="filter-btn">Toll-Free</button>
+    </div>
+  </div>
+
+  <!-- MAIN + SIDEBAR -->
+  <div class="main-wrap">
+    <main>
+      <div class="section-label">Latest Articles</div>
+      <div class="post-grid">
+
+        <!-- Wide card -->
+        <article class="post-card post-card-wide">
+          <div class="post-card-thumb">
+            <img src="https://www.numberbarn.com/blog/wp-content/uploads/2018/06/top-view-modern-workplace-with-smart-phone-placed-2026-01-07-05-43-50-utc.jpg" alt="Port your number" />
+          </div>
+          <div class="post-card-body">
+            <span class="cat-tag cat-askpig">Ask the Pig</span>
+            <h3><a href="post.html">How Long Does It Take To Port My Number?</a></h3>
+            <p class="post-excerpt">Porting a phone number can feel like a mystery — will it take a day or a week? We break down exactly what happens behind the scenes and what you can do to speed things up.</p>
+            <div class="post-footer">
+              <div class="author-chip">
+                <div class="author-av"><img src="https://secure.gravatar.com/avatar/5a6fb0ce3eb218c761853ba0cef2d9bf?s=56&d=retro&r=g" alt="Ella Delancey Jones" /></div>
+                <div>
+                  <div class="author-name">Ella Delancey Jones</div>
+                  <div class="post-date">Mar 5, 2026</div>
+                </div>
+              </div>
+              <span class="read-time">⏱ 5 min read</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 1 -->
+        <article class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://www.numberbarn.com/blog/wp-content/uploads/2026/02/los-angeles-downtown-skyline-at-sunset.jpg" alt="Los Angeles" />
+          </div>
+          <div class="post-card-body">
+            <span class="cat-tag cat-general">General</span>
+            <h3><a href="#">Los Angeles Area Codes & Phone Numbers: Neighborhood Guide</a></h3>
+            <p class="post-excerpt">From the 213 to the 747, LA's area codes tell the story of one of America's most sprawling and dynamic cities.</p>
+            <div class="post-footer">
+              <div class="author-chip">
+                <div class="author-av"><img src="https://secure.gravatar.com/avatar/9fb6dbe00f30d33f9aee3077c9d70efc?s=56&d=retro&r=g" alt="Alan Lopez" /></div>
+                <div>
+                  <div class="author-name">Alan Lopez</div>
+                  <div class="post-date">Feb 17, 2026</div>
+                </div>
+              </div>
+              <span class="read-time">⏱ 7 min read</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://www.numberbarn.com/blog/wp-content/uploads/2026/02/biker-holding-smartphone-with-incoming-call-2026.jpg" alt="Caller ID" />
+          </div>
+          <div class="post-card-body">
+            <span class="cat-tag cat-general">General</span>
+            <h3><a href="#">How to Update Caller ID Name and Number</a></h3>
+            <p class="post-excerpt">Your caller ID is often the first impression you make. Here's how to make sure it says exactly what you want it to say.</p>
+            <div class="post-footer">
+              <div class="author-chip">
+                <div class="author-av"><img src="https://secure.gravatar.com/avatar/9fb6dbe00f30d33f9aee3077c9d70efc?s=56&d=retro&r=g" alt="Alan Lopez" /></div>
+                <div>
+                  <div class="author-name">Alan Lopez</div>
+                  <div class="post-date">Feb 24, 2026</div>
+                </div>
+              </div>
+              <span class="read-time">⏱ 4 min read</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://www.numberbarn.com/blog/wp-content/uploads/2026/02/MOST-VALUABLE-PHONE-NUMBER.png" alt="Most Valuable Numbers" />
+          </div>
+          <div class="post-card-body">
+            <span class="cat-tag cat-bynumbers">By the Numbers</span>
+            <h3><a href="#">The Most Valuable Phone Numbers of 2025</a></h3>
+            <p class="post-excerpt">Which phone numbers are actually worth serious money? We crunched the data to reveal the most sought-after numbers on the market.</p>
+            <div class="post-footer">
+              <div class="author-chip">
+                <div class="author-av"><img src="https://secure.gravatar.com/avatar/49029af7e45cbc955d8a3c26fe4c8d47?s=56&d=retro&r=g" alt="Joel Arnold" /></div>
+                <div>
+                  <div class="author-name">Joel Arnold</div>
+                  <div class="post-date">Feb 13, 2026</div>
+                </div>
+              </div>
+              <span class="read-time">⏱ 6 min read</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://www.numberbarn.com/blog/wp-content/uploads/2026/01/usa-new-york-state-new-york-city-view-of-empire-2026-01-05-00-37-28-utc.jpg" alt="New York City" />
+          </div>
+          <div class="post-card-body">
+            <span class="cat-tag cat-general">General</span>
+            <h3><a href="#">New York Area Codes & Phone Numbers: Complete Guide to NYC's Boroughs</a></h3>
+            <p class="post-excerpt">NYC has more area codes than you might expect. Here's your borough-by-borough breakdown of every local number.</p>
+            <div class="post-footer">
+              <div class="author-chip">
+                <div class="author-av"><img src="https://secure.gravatar.com/avatar/9fb6dbe00f30d33f9aee3077c9d70efc?s=56&d=retro&r=g" alt="Alan Lopez" /></div>
+                <div>
+                  <div class="author-name">Alan Lopez</div>
+                  <div class="post-date">Jan 27, 2026</div>
+                </div>
+              </div>
+              <span class="read-time">⏱ 8 min read</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://www.numberbarn.com/blog/wp-content/uploads/2026/02/red-telephone-sitting-next-to-a-canadian-flag-2026.jpg" alt="Canadian number" />
+          </div>
+          <div class="post-card-body">
+            <span class="cat-tag cat-general">General</span>
+            <h3><a href="#">How to Get a Canadian Toll-Free or Vanity ('VIP') Phone Number</a></h3>
+            <p class="post-excerpt">Serving Canadian customers? We walk you through every step of securing a Canadian toll-free or vanity number for your business.</p>
+            <div class="post-footer">
+              <div class="author-chip">
+                <div class="author-av-i">CS</div>
+                <div>
+                  <div class="author-name">Content Staff</div>
+                  <div class="post-date">Feb 26, 2026</div>
+                </div>
+              </div>
+              <span class="read-time">⏱ 5 min read</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://www.numberbarn.com/blog/wp-content/uploads/2026/02/dialing-a-telephone-in-the-office-2026.jpg" alt="Ad tracking" />
+          </div>
+          <div class="post-card-body">
+            <span class="cat-tag cat-featured">Featured Customers</span>
+            <h3><a href="#">How to Track Your Ad Performance Using Phone Numbers</a></h3>
+            <p class="post-excerpt">A unique number per ad campaign is one of the simplest ways to measure what's actually driving calls to your business.</p>
+            <div class="post-footer">
+              <div class="author-chip">
+                <div class="author-av"><img src="https://secure.gravatar.com/avatar/5a6fb0ce3eb218c761853ba0cef2d9bf?s=56&d=retro&r=g" alt="Ella Delancey Jones" /></div>
+                <div>
+                  <div class="author-name">Ella Delancey Jones</div>
+                  <div class="post-date">Feb 13, 2026</div>
+                </div>
+              </div>
+              <span class="read-time">⏱ 4 min read</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="load-more-wrap">
+        <a href="#" class="load-more-btn">
+          Load More Articles
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+      </div>
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <div class="widget-head">Search</div>
+        <div class="widget-body">
+          <div class="search-box">
+            <input type="text" placeholder="Search articles…" />
+            <button aria-label="Search">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-widget newsletter-widget">
+        <div class="widget-head">Weekly Digest</div>
+        <div class="widget-body">
+          <p>Get the best phone number tips and industry news delivered to your inbox every week.</p>
+          <input class="nl-input" type="email" placeholder="your@email.com" />
+          <button class="nl-btn">Subscribe &rarr;</button>
+        </div>
+      </div>
+
+      <div class="sidebar-widget">
+        <div class="widget-head">Popular Posts</div>
+        <div class="widget-body">
+          <ul class="popular-list">
+            <li class="popular-item">
+              <span class="popular-num">01</span>
+              <div><h4><a href="post.html">How Long Does It Take To Port My Number?</a></h4><span>14,200 views</span></div>
+            </li>
+            <li class="popular-item">
+              <span class="popular-num">02</span>
+              <div><h4><a href="#">The Most Valuable Phone Numbers of 2025</a></h4><span>11,500 views</span></div>
+            </li>
+            <li class="popular-item">
+              <span class="popular-num">03</span>
+              <div><h4><a href="#">New York Area Codes: Complete Guide</a></h4><span>9,800 views</span></div>
+            </li>
+            <li class="popular-item">
+              <span class="popular-num">04</span>
+              <div><h4><a href="#">How to Update Caller ID Name and Number</a></h4><span>7,400 views</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-widget">
+        <div class="widget-head">Topics</div>
+        <div class="widget-body">
+          <div class="tag-cloud">
+            <a href="#" class="tag-pill">Vanity Numbers</a>
+            <a href="#" class="tag-pill">Porting</a>
+            <a href="#" class="tag-pill">VoIP</a>
+            <a href="#" class="tag-pill">Toll-Free</a>
+            <a href="#" class="tag-pill">Area Codes</a>
+            <a href="#" class="tag-pill">Caller ID</a>
+            <a href="#" class="tag-pill">SMS</a>
+            <a href="#" class="tag-pill">FCC</a>
+            <a href="#" class="tag-pill">Number Parking</a>
+            <a href="#" class="tag-pill">STIR/SHAKEN</a>
+            <a href="#" class="tag-pill">Business</a>
+            <a href="#" class="tag-pill">Canada</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- MEET THE AUTHORS -->
+  <section class="authors-section">
+    <div class="authors-inner">
+      <div class="authors-header">
+        <div class="authors-eyebrow">Our Writers</div>
+        <h2>Meet the phone tech experts</h2>
+        <p>Real people who know phone numbers inside and out — from journalists to marketers to content pros.</p>
+      </div>
+      <div class="authors-grid">
+
+        <div class="author-card">
+          <div class="author-card-photo">
+            <img src="https://secure.gravatar.com/avatar/9fb6dbe00f30d33f9aee3077c9d70efc?s=160&d=retro&r=g" alt="Alan Lopez" />
+          </div>
+          <h3>Alan Lopez</h3>
+          <div class="author-role">Marketing & Media</div>
+          <p>Lifestyle blogger and marketing manager covering electronics and media culture. He remembers when picking up the phone disconnected the internet.</p>
+          <a href="author.html" class="view-posts">All posts <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div class="author-card">
+          <div class="author-card-photo">
+            <img src="https://secure.gravatar.com/avatar/5a6fb0ce3eb218c761853ba0cef2d9bf?s=160&d=retro&r=g" alt="Ella Delancey Jones" />
+          </div>
+          <h3>Ella Delancey Jones</h3>
+          <div class="author-role">Journalist & Copywriter</div>
+          <p>Award-nominated journalist whose work has appeared in Cosmopolitan, POPSUGAR, Insider, The Independent, Grazia, Sky News, and BBC.</p>
+          <a href="author.html" class="view-posts">All posts <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div class="author-card">
+          <div class="author-card-photo">
+            <img src="https://secure.gravatar.com/avatar/0751d8b501a2246e8c3ed1813b282cd5?s=160&d=retro&r=g" alt="Mariana Camacho" />
+          </div>
+          <h3>Mariana Camacho</h3>
+          <div class="author-role">Content Writer</div>
+          <p>Deep-dive researcher and writer specializing in local guides and area code histories, from Chicago neighborhoods to coastal cities across the US.</p>
+          <a href="author.html" class="view-posts">All posts <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div class="author-card">
+          <div class="author-card-photo">
+            <img src="https://secure.gravatar.com/avatar/49029af7e45cbc955d8a3c26fe4c8d47?s=160&d=retro&r=g" alt="Joel Arnold" />
+          </div>
+          <h3>Joel Arnold</h3>
+          <div class="author-role">Content Coordinator</div>
+          <p>Content Coordinator at NumberBarn contributing to the blog and social media. Survivor fan, coffee shop reader, and proud dog park regular.</p>
+          <a href="author.html" class="view-posts">All posts <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="banner-cta">
+    <h2>Find Your Perfect Phone Number Today</h2>
+    <p>Search millions of available numbers — local, toll-free, and vanity — starting at just $2/month.</p>
+    <a href="https://www.numberbarn.com" class="banner-btn">
+      Search Numbers
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/images/logo-dark.png" alt="NumberBarn Blog" />
+          </div>
+          <p>The smarter way to find, park, and manage phone numbers. Trusted by thousands of businesses and entrepreneurs across the US.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Blog</h4>
+          <ul>
+            <li><a href="#">Number Tips</a></li>
+            <li><a href="#">VoIP & Tech</a></li>
+            <li><a href="#">Business</a></li>
+            <li><a href="#">Guides</a></li>
+            <li><a href="#">News</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="https://www.numberbarn.com">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Porting FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 NumberBarn. All rights reserved.</span>
+        <div>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
