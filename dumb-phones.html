@@ -204,6 +204,27 @@
     .inline-img img { width: 100%; border-radius: 10px; display: block; }
     .inline-img figcaption { font-size: 12px; color: #9ca7b0; margin-top: 8px; font-style: italic; }
 
+    /* Side-by-side wrap (text + squared product image) */
+    .inline-wrap {
+      display: grid;
+      grid-template-columns: 1fr 33%;
+      gap: 32px;
+      align-items: start;
+      margin-bottom: 24px;
+    }
+    .inline-float img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; display: block; }
+    .inline-float figcaption { font-size: 12px; color: #9ca7b0; margin-top: 8px; font-style: italic; text-align: center; }
+
+    /* NumberBarn embed */
+    .nb-embed { margin: 36px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+    .nb-embed iframe { width: 100%; height: 520px; display: block; border: none; }
+
+    @media (max-width: 768px) {
+      .inline-wrap { display: flex; flex-direction: column; }
+      .inline-float img { width: 70%; margin: 0 auto; }
+      .nb-embed iframe { height: 420px; }
+    }
+
     /* Interactive charts */
     .chart-wrap {
       margin: 36px 0;
@@ -454,12 +475,15 @@
 
       <p>On one end of the spectrum, any smartphone can be outfitted to reduce its capabilities, with time-limit and blocking apps aplenty, widely available to purchase on all digital storefronts.</p>
 
-      <p>There also exist external products you can buy that force the issue a little more tangibly. "BRICK" is one popular physical accessory that allows you to digitally customize which things you want to be turned off and for how long, rendering them disabled on your smartphone until you physically tap it against your BRICK again — the idea being that the device gets stored away, or given to someone else to monitor. "Bloom" and "Unpluq" are other such similar products.</p>
-
-      <figure class="inline-img">
-        <img src="assets/images/brick-device.png" alt="The BRICK device — a physical accessory to disable smartphone features" />
-        <figcaption>The BRICK — tap your phone against it to re-enable features you've locked out.</figcaption>
-      </figure>
+      <div class="inline-wrap">
+        <div class="inline-text">
+          <p>There also exist external products you can buy that force the issue a little more tangibly. "BRICK" is one popular physical accessory that allows you to digitally customize which things you want to be turned off and for how long, rendering them disabled on your smartphone until you physically tap it against your BRICK again — the idea being that the device gets stored away, or given to someone else to monitor. "Bloom" and "Unpluq" are other such similar products.</p>
+        </div>
+        <div class="inline-float">
+          <img src="assets/images/brick-device.png" alt="The BRICK device" />
+          <figcaption>The BRICK — tap against it to re-enable features you've locked out.</figcaption>
+        </div>
+      </div>
 
       <p>Yet what most people think of when they hear the term dumb phone is something more akin to flip phones and Blackberries, popular devices which reigned during the 1990s and early 2000s, and whose limitations are now being reconstructed as perks.</p>
 
@@ -477,7 +501,20 @@
 
       <p><a href="#">In an interview with CNN</a>, Kaiwei Tang, the founder of the Light Phone's development team called "Light", says the philosophy behind the Light Phone was not based on being anti-technology. "We see ourselves as a lifestyle brand … We're promoting a lifestyle that's very different from a smartphone-centric lifestyle."</p>
 
-      <p>Highlighted in that same report, the "<a href="#">Punkt</a>" is another lo-fi, high-end consumer product that's found a dedicated following, thanks in part to a retro design that takes its cues from the 1970s over the 1990s. It's a similarly stripped down phone that's selling at a price point not so far off from many smartphones: $229 for its initial model, $299 for the latest. The aforementioned Light Phone, meanwhile, currently sits at a lofty $699 — a price not at all dissimilar to the cost of many Android and iPhone phones.</p>
+      <figure class="inline-img">
+        <img src="assets/images/light-phone.jpg" alt="Person holding the Light Phone, showing its minimalist black and white GPS map display" />
+        <figcaption>The Light Phone II — a minimalist 5G phone with a matte finish and e-ink display.</figcaption>
+      </figure>
+
+      <div class="inline-wrap">
+        <div class="inline-text">
+          <p>Highlighted in that same report, the "<a href="#">Punkt</a>" is another lo-fi, high-end consumer product that's found a dedicated following, thanks in part to a retro design that takes its cues from the 1970s over the 1990s. It's a similarly stripped down phone that's selling at a price point not so far off from many smartphones: $229 for its initial model, $299 for the latest. The aforementioned Light Phone, meanwhile, currently sits at a lofty $699 — a price not at all dissimilar to the cost of many Android and iPhone phones.</p>
+        </div>
+        <div class="inline-float">
+          <img src="assets/images/punkt-phone.jpg" alt="Punkt MP02 dumb phone on a desk" />
+          <figcaption>The Punkt MP02 — retro design, stripped-down features.</figcaption>
+        </div>
+      </div>
 
       <p>"$699 is not a huge investment (to) get hours of your time and attention back." — Kaiwei Tang, Light Phone founder, to CNN</p>
 
@@ -508,6 +545,11 @@
 
       <p>And while the exact number of feature phone users isn't easily known (to keep things in context, The Light Phone reported <a href="#">moving 100,000 units last year</a>, while Apple shipped <a href="#">247 million phones</a> worldwide in 2025), there are plenty of signs that the number is still significant enough to drive capital investment in these types of phones, big <a href="#">movie tie-ins</a>, <a href="#">social media trends</a>, and more.</p>
 
+      <figure class="inline-img">
+        <img src="assets/images/barbie-phone.jpg" alt="Barbie-branded flip phone with pink accessories — a notable movie tie-in dumb phone" />
+        <figcaption>The Barbie x HMD flip phone — a limited-edition movie tie-in that helped drive mainstream dumb phone awareness.</figcaption>
+      </figure>
+
       <p>In fact, whatever people think of dumb phones, and whether or not they've personally purchased one, the umbrella search trend for people looking up the term "dumb phone" has roughly quadrupled over the past five years. Any way you slice the data, to make <em>any</em> dent within arguably the most prolific consumer device in human history is worth remarking over.</p>
 
       <h2>These Are The People Trying To Help Themselves</h2>
@@ -519,6 +561,11 @@
       <p><a href="#">According to an article by Wired</a>, the community has grown five times its size in just a few years, with 50,000 people now posting to it daily (presumably, not so frequently from a smartphone).</p>
 
       <p>Among the community's most proliferated resources is "<a href="#">The Dumbphone Finder</a>", an old-school website run by a moderator of the dumbphone Reddit community, Jose Briones. Upkept here are similarly old-school forums, lifehacks, and book recommendations. The ethos for all of it is to begin chipping away at mobile phone usage exactly where you currently sit mentally. People are encouraged to avoid cold-turkey solutions, as well as to steer clear of any judgement associated with their smartphone use.</p>
+
+      <figure class="inline-img">
+        <img src="assets/images/dumbphone-finder.jpg" alt="The Dumbphone Finder website homepage by Jose Briones" />
+        <figcaption>The Dumbphone Finder — a community resource for finding the right device and strategy for going low-tech.</figcaption>
+      </figure>
 
       <p>To date, Briones' associated <a href="#">dumb phone YouTube channel</a> currently has over 40,000 subscribers filled with videos helping people to get "dumber".</p>
 
@@ -559,10 +606,14 @@
       <div class="inline-cta">
         <h3>Keep Your Number. Lose the Smartphone.</h3>
         <p>Phone numbers can be "parked" with NumberBarn — reserved for just $2.99/mo — so you can explore the dumb phone life without losing the number you've had for years.</p>
-        <a href="https://www.numberbarn.com">
+        <a href="https://www.numberbarn.com/number-parking">
           Park Your Number
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
+      </div>
+
+      <div class="nb-embed">
+        <iframe src="https://www.numberbarn.com/number-parking" title="Park Your Number with NumberBarn" loading="lazy" scrolling="yes"></iframe>
       </div>
 
       <p>For those who just need a break, or maybe aren't sure which dumb phone solution they want to try yet, phone numbers are able to be "parked", or reserved, allowing the flexibility to explore decoupling from technology at your own pace. The power to park a phone number is one of the best gateways to making a lifestyle switch, because you don't have to lose your phone number identity to try it.</p>
