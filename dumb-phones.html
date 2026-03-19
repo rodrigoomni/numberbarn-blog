@@ -212,6 +212,7 @@
       align-items: start;
       margin-bottom: 24px;
     }
+    .inline-wrap--left { grid-template-columns: 33% 1fr; }
     .inline-float img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; display: block; }
     .inline-float figcaption { font-size: 12px; color: #9ca7b0; margin-top: 8px; font-style: italic; text-align: center; }
 
@@ -486,13 +487,13 @@
 
       <p>On one end of the spectrum, any smartphone can be outfitted to reduce its capabilities, with time-limit and blocking apps aplenty, widely available to purchase on all digital storefronts.</p>
 
-      <div class="inline-wrap">
-        <div class="inline-text">
-          <p>There also exist external products you can buy that force the issue a little more tangibly. "BRICK" is one popular physical accessory that allows you to digitally customize which things you want to be turned off and for how long, rendering them disabled on your smartphone until you physically tap it against your BRICK again — the idea being that the device gets stored away, or given to someone else to monitor. "Bloom" and "Unpluq" are other such similar products.</p>
-        </div>
+      <div class="inline-wrap inline-wrap--left">
         <div class="inline-float">
           <img src="assets/images/brick-device.png" alt="The BRICK device" />
           <figcaption>The BRICK — tap against it to re-enable features you've locked out.</figcaption>
+        </div>
+        <div class="inline-text">
+          <p>There also exist external products you can buy that force the issue a little more tangibly. "BRICK" is one popular physical accessory that allows you to digitally customize which things you want to be turned off and for how long, rendering them disabled on your smartphone until you physically tap it against your BRICK again — the idea being that the device gets stored away, or given to someone else to monitor. "Bloom" and "Unpluq" are other such similar products.</p>
         </div>
       </div>
 
