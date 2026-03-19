@@ -6,6 +6,7 @@
   <title>The Rise of Dumb Phones: Where and How Many Dumb Phones Exist – NumberBarn Blog</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -134,7 +135,7 @@
     /* Spot illustration — grid layout so mobile stacks below text */
     .intro-wrap {
       display: grid;
-      grid-template-columns: 1fr 46%;
+      grid-template-columns: 1fr 33%;
       gap: 32px;
       align-items: start;
       margin-bottom: 8px;
@@ -197,6 +198,31 @@
     .methodology h3 { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #9ca7b0; margin-bottom: 12px; }
     .methodology p, .methodology li { font-size: 14px; line-height: 1.7; color: #7a8b96; margin-bottom: 6px; }
     .methodology ul { padding-left: 18px; }
+
+    /* Inline product image */
+    .inline-img { margin: 28px 0; }
+    .inline-img img { width: 100%; border-radius: 10px; display: block; }
+    .inline-img figcaption { font-size: 12px; color: #9ca7b0; margin-top: 8px; font-style: italic; }
+
+    /* Interactive charts */
+    .chart-wrap {
+      margin: 36px 0;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px 20px;
+    }
+    .chart-wrap h4 {
+      font-size: 15px; font-weight: 800; color: var(--navy);
+      margin-bottom: 4px; letter-spacing: -.2px;
+    }
+    .chart-wrap .chart-sub {
+      font-size: 12px; color: #9ca7b0; margin-bottom: 20px; line-height: 1.5;
+    }
+    .chart-wrap .chart-source {
+      font-size: 11px; color: #b0bec8; margin-top: 14px; border-top: 1px solid var(--border); padding-top: 10px;
+    }
+    .chart-canvas-wrap { position: relative; width: 100%; }
 
     /* Illustration credit */
     .illus-credit { text-align: center; font-size: 13px; color: #9ca7b0; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
@@ -369,10 +395,10 @@
       <!-- Byline -->
       <div class="article-byline">
         <div class="byline-av">
-          <img src="https://secure.gravatar.com/avatar/5a6fb0ce3eb218c761853ba0cef2d9bf?s=96&d=retro&r=g" alt="Ella Delancey Jones" />
+          <img src="https://secure.gravatar.com/avatar/9fb6dbe00f30d33f9aee3077c9d70efc?s=96&d=retro&r=g" alt="Alan Lopez" />
         </div>
         <div class="byline-meta">
-          <div class="byline-name"><a href="author.html">Ella Delancey Jones</a></div>
+          <div class="byline-name"><a href="author.html">Alan Lopez</a></div>
           <div class="byline-details">March 19, 2026 &nbsp;·&nbsp; 12 min read &nbsp;·&nbsp; By The Numbers</div>
         </div>
         <div class="byline-share">
@@ -430,6 +456,11 @@
 
       <p>There also exist external products you can buy that force the issue a little more tangibly. "BRICK" is one popular physical accessory that allows you to digitally customize which things you want to be turned off and for how long, rendering them disabled on your smartphone until you physically tap it against your BRICK again — the idea being that the device gets stored away, or given to someone else to monitor. "Bloom" and "Unpluq" are other such similar products.</p>
 
+      <figure class="inline-img">
+        <img src="assets/images/brick-device.png" alt="The BRICK device — a physical accessory to disable smartphone features" />
+        <figcaption>The BRICK — tap your phone against it to re-enable features you've locked out.</figcaption>
+      </figure>
+
       <p>Yet what most people think of when they hear the term dumb phone is something more akin to flip phones and Blackberries, popular devices which reigned during the 1990s and early 2000s, and whose limitations are now being reconstructed as perks.</p>
 
       <p>In a predictable, tried-and-true gamut of creating a problem, then selling you the solution, the phone industry has been happy to capitalize on the resurgence of these low-capability devices. At this highest level, dumb phones are marketed as "<strong>feature phones</strong>", as in, phones marked by stripped down, individual features of your choosing, or sometimes just "<strong>basic phones</strong>".</p>
@@ -448,9 +479,7 @@
 
       <p>Highlighted in that same report, the "<a href="#">Punkt</a>" is another lo-fi, high-end consumer product that's found a dedicated following, thanks in part to a retro design that takes its cues from the 1970s over the 1990s. It's a similarly stripped down phone that's selling at a price point not so far off from many smartphones: $229 for its initial model, $299 for the latest. The aforementioned Light Phone, meanwhile, currently sits at a lofty $699 — a price not at all dissimilar to the cost of many Android and iPhone phones.</p>
 
-      <blockquote>
-        <p>"$699 is not a huge investment (to) get hours of your time and attention back." — Kaiwei Tang, Light Phone founder, to CNN</p>
-      </blockquote>
+      <p>"$699 is not a huge investment (to) get hours of your time and attention back." — Kaiwei Tang, Light Phone founder, to CNN</p>
 
       <p>That sentiment underscores the idea that dumb phone adoption is not always just an ethics-laden endeavor; there is an <em>enthusiastically</em> paying market for phones untangled from being everything-in-one devices. Many people aren't begrudgingly downgrading their phones, they're paying for the privilege.</p>
 
@@ -466,14 +495,20 @@
 
       <p>A key distinction in the data is that of "cellphones" from "smartphones" ownership, and there is a small difference. By 2026, <strong>91%</strong> reported owning a smart phone of some kind, or roughly 9 in 10.</p>
 
+      <div class="chart-wrap">
+        <h4>Mobile Phone Ownership in the U.S.</h4>
+        <p class="chart-sub">% of U.S. adults who say they own a cellphone vs. smartphone</p>
+        <div class="chart-canvas-wrap">
+          <canvas id="pewChart"></canvas>
+        </div>
+        <p class="chart-source">Source: Pew Research Center, Surveys of U.S. adults conducted 2002–2025. Note: vertical line indicates change in survey mode in 2023.</p>
+      </div>
+
       <p>That remaining 1 in 10? That's likely the dumb phone market share in the U.S. right there.</p>
 
       <p>And while the exact number of feature phone users isn't easily known (to keep things in context, The Light Phone reported <a href="#">moving 100,000 units last year</a>, while Apple shipped <a href="#">247 million phones</a> worldwide in 2025), there are plenty of signs that the number is still significant enough to drive capital investment in these types of phones, big <a href="#">movie tie-ins</a>, <a href="#">social media trends</a>, and more.</p>
 
-      <div class="callout">
-        <div class="callout-icon">📊</div>
-        <p>In fact, whatever people think of dumb phones, and whether or not they've personally purchased one, the umbrella <strong>search trend for people looking up the term "dumb phone" has roughly quadrupled over the past five years.</strong> Any way you slice the data, to make <em>any</em> dent within arguably the most prolific consumer device in human history is worth remarking over.</p>
-      </div>
+      <p>In fact, whatever people think of dumb phones, and whether or not they've personally purchased one, the umbrella search trend for people looking up the term "dumb phone" has roughly quadrupled over the past five years. Any way you slice the data, to make <em>any</em> dent within arguably the most prolific consumer device in human history is worth remarking over.</p>
 
       <h2>These Are The People Trying To Help Themselves</h2>
 
@@ -491,7 +526,18 @@
 
       <p>Although the smartphone's biggest customer, one key demographic that's a part of driving this movement is in fact, younger Gen Z members.</p>
 
-      <p>Despite the pervasive stereotype that young people are chronically phone-attached (albeit, a stereotype backed by <a href="#">self-report data</a>), it makes sense there could emerge a sizable population of young adults trying to break free. This, in part, may explain Gen Z's general <a href="#">attraction to Y2K-themed fashion and low-fi tech</a>. After all, the youngest generation stands to be harmed the hardest by smartphones, what with <a href="#">endlessly</a> <a href="#">damning</a> <a href="#">research</a> on health decline associated with persistent smartphone usage. (And nevermind the yet fully realized health and ethical quagmire of data-mining and the <a href="#">AI smartbot boom</a>.)</p>
+      <p>Despite the pervasive stereotype that young people are chronically phone-attached (albeit, a stereotype backed by <a href="#">self-report data</a>), it makes sense there could emerge a sizable population of young adults trying to break free.</p>
+
+      <div class="chart-wrap">
+        <h4>Indicators of Americans' Attachment to Their Smartphone, by Age</h4>
+        <p class="chart-sub">Hover over bars to see exact percentages &mdash; Jan. 3–Feb. 18, 2022. Based on U.S. adults who own a smartphone.</p>
+        <div class="chart-canvas-wrap">
+          <canvas id="gallupChart"></canvas>
+        </div>
+        <p class="chart-source">Source: Gallup</p>
+      </div>
+
+      <p>This, in part, may explain Gen Z's general <a href="#">attraction to Y2K-themed fashion and low-fi tech</a>. After all, the youngest generation stands to be harmed the hardest by smartphones, what with <a href="#">endlessly</a> <a href="#">damning</a> <a href="#">research</a> on health decline associated with persistent smartphone usage. (And nevermind the yet fully realized health and ethical quagmire of data-mining and the <a href="#">AI smartbot boom</a>.)</p>
 
       <p>While countries like Australia have famously <a href="#">outright banned social media for children</a>, Americans specifically have had to fend for themselves from within an environment that hyper-accelerates smartphone usage, not curbs it.</p>
 
@@ -555,12 +601,12 @@
       <!-- Author Bio -->
       <div class="author-bio">
         <div class="author-bio-photo">
-          <img src="https://secure.gravatar.com/avatar/5a6fb0ce3eb218c761853ba0cef2d9bf?s=160&d=retro&r=g" alt="Ella Delancey Jones" />
+          <img src="https://secure.gravatar.com/avatar/9fb6dbe00f30d33f9aee3077c9d70efc?s=160&d=retro&r=g" alt="Alan Lopez" />
         </div>
         <div class="author-bio-text">
-          <div class="author-bio-name"><a href="author.html">Ella Delancey Jones</a></div>
-          <div class="author-bio-role">Journalist &amp; Copywriter</div>
-          <p>Award-nominated journalist and copywriter who launched her own content business in 2018. Her work has appeared in Cosmopolitan, POPSUGAR, Insider, The Independent, and Grazia, with features on Sky News and BBC. She specializes in clear, thoughtful, and reliable content across journalism and brand storytelling.</p>
+          <div class="author-bio-name"><a href="author.html">Alan Lopez</a></div>
+          <div class="author-bio-role">Staff Writer</div>
+          <p>Alan writes about phone numbers, telecom trends, and the intersections of technology and everyday life. His work at NumberBarn covers everything from number porting to the cultural shifts reshaping how we communicate.</p>
           <div class="author-bio-links">
             <a href="author.html" class="author-bio-link">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -641,9 +687,9 @@
             <h3><a href="post.html">How Long Does It Take To Port My Number?</a></h3>
             <div class="post-footer">
               <div class="author-chip">
-                <div class="author-av"><img src="https://secure.gravatar.com/avatar/5a6fb0ce3eb218c761853ba0cef2d9bf?s=56&d=retro&r=g" alt="Ella Delancey Jones" /></div>
+                <div class="author-av"><img src="https://secure.gravatar.com/avatar/9fb6dbe00f30d33f9aee3077c9d70efc?s=56&d=retro&r=g" alt="Alan Lopez" /></div>
                 <div>
-                  <div class="author-name">Ella Delancey Jones</div>
+                  <div class="author-name">Alan Lopez</div>
                   <div class="post-date">Mar 5, 2026</div>
                 </div>
               </div>
@@ -681,9 +727,9 @@
             <h3><a href="#">Phone Number History: How to Tell If Your Number's Been Used Before</a></h3>
             <div class="post-footer">
               <div class="author-chip">
-                <div class="author-av"><img src="https://secure.gravatar.com/avatar/5a6fb0ce3eb218c761853ba0cef2d9bf?s=56&d=retro&r=g" alt="Ella Delancey Jones" /></div>
+                <div class="author-av"><img src="https://secure.gravatar.com/avatar/9fb6dbe00f30d33f9aee3077c9d70efc?s=56&d=retro&r=g" alt="Alan Lopez" /></div>
                 <div>
-                  <div class="author-name">Ella Delancey Jones</div>
+                  <div class="author-name">Alan Lopez</div>
                   <div class="post-date">Feb 19, 2026</div>
                 </div>
               </div>
@@ -755,6 +801,139 @@
       </div>
     </div>
   </footer>
+
+  <script>
+  // ── PEW RESEARCH: Mobile phone ownership line chart ──────────────────────
+  (function() {
+    const labels = ['2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'];
+    const cellphone = [65,68,73,75,78,82,85,88,91,91,90,92,95,95,96,96,97,97,97,98,98,98];
+    const smartphone = [null,null,null,null,null,null,null,35,46,56,64,68,72,77,81,81,85,85,85,90,91,91];
+
+    const ctx = document.getElementById('pewChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Cellphone',
+            data: cellphone,
+            borderColor: '#144b6e',
+            backgroundColor: 'rgba(20,75,110,0.08)',
+            borderWidth: 2.5,
+            pointRadius: 3,
+            pointHoverRadius: 6,
+            pointBackgroundColor: '#144b6e',
+            fill: false,
+            tension: 0.35,
+          },
+          {
+            label: 'Smartphone',
+            data: smartphone,
+            borderColor: '#8a9e3a',
+            backgroundColor: 'rgba(138,158,58,0.08)',
+            borderWidth: 2.5,
+            pointRadius: 3,
+            pointHoverRadius: 6,
+            pointBackgroundColor: '#8a9e3a',
+            fill: false,
+            tension: 0.35,
+            spanGaps: false,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { font: { family: 'Inter', size: 12 }, color: '#535e66', boxWidth: 20, padding: 16 }
+          },
+          tooltip: {
+            backgroundColor: '#11364e',
+            titleFont: { family: 'Inter', size: 12 },
+            bodyFont: { family: 'Inter', size: 12 },
+            callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%` }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(0,0,0,0.05)' },
+            ticks: { font: { family: 'Inter', size: 11 }, color: '#9ca7b0', maxTicksLimit: 10 }
+          },
+          y: {
+            min: 0, max: 100,
+            grid: { color: 'rgba(0,0,0,0.05)' },
+            ticks: {
+              font: { family: 'Inter', size: 11 }, color: '#9ca7b0',
+              callback: v => v + '%', stepSize: 20
+            }
+          }
+        }
+      }
+    });
+  })();
+
+  // ── GALLUP: Smartphone attachment grouped bar chart ──────────────────────
+  (function() {
+    const labels = [
+      'Keep it near\nduring waking hours',
+      'Keep it near\nat night',
+      'Check it upon\nawaking',
+      'Spend too\nmuch time on it',
+      "Can't imagine\nlife without it",
+      'Would be anxious\nif lost for a day'
+    ];
+
+    // Wrap labels for display
+    const wrappedLabels = labels.map(l => l.split('\n'));
+
+    const ctx = document.getElementById('gallupChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: wrappedLabels,
+        datasets: [
+          { label: '18–29', data: [95, 92, 86, 81, 64, 52], backgroundColor: '#4a8c5c', borderRadius: 3 },
+          { label: '30–49', data: [91, 83, 74, 74, 53, 54], backgroundColor: '#144b6e', borderRadius: 3 },
+          { label: '50–64', data: [78, 63, 50, 47, 47, 36], backgroundColor: '#63a1c7', borderRadius: 3 },
+          { label: '65+',   data: [69, 49, 48, 30, 43, 30], backgroundColor: '#b04060', borderRadius: 3 },
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { font: { family: 'Inter', size: 12 }, color: '#535e66', boxWidth: 16, padding: 16 }
+          },
+          tooltip: {
+            backgroundColor: '#11364e',
+            titleFont: { family: 'Inter', size: 12 },
+            bodyFont: { family: 'Inter', size: 12 },
+            callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%` }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { font: { family: 'Inter', size: 11 }, color: '#535e66' }
+          },
+          y: {
+            min: 0, max: 100,
+            grid: { color: 'rgba(0,0,0,0.05)' },
+            ticks: {
+              font: { family: 'Inter', size: 11 }, color: '#9ca7b0',
+              callback: v => v + '%', stepSize: 20
+            }
+          }
+        }
+      }
+    });
+  })();
+  </script>
 
 </body>
 </html>
