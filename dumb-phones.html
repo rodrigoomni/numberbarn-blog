@@ -245,6 +245,17 @@
     }
     .chart-canvas-wrap { position: relative; width: 100%; }
 
+    /* Drop cap */
+    .intro-text p:first-child::first-letter {
+      font-family: 'Lora', serif;
+      font-size: 4.2em;
+      font-weight: 600;
+      line-height: 0.82;
+      float: left;
+      margin: 6px 10px 0 0;
+      color: var(--navy);
+    }
+
     /* Illustration credit */
     .illus-credit { text-align: center; font-size: 13px; color: #9ca7b0; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
     .illus-credit a { color: var(--blue); text-decoration: underline; }
@@ -452,7 +463,7 @@
       <!-- Intro grid: text left, spot illustration right (stacks below on mobile) -->
       <div class="intro-wrap">
         <div class="intro-text">
-          <p>"Imagine a device as powerful as a calculator," Steve Jobs never once said while standing on a dimly lit stage. He also never took a flip-phone out from his jean pockets before asking us to gaze into the past.</p>
+          <p>Imagine a device as powerful as a calculator," Steve Jobs never once said while standing on a dimly lit stage. He also never took a flip-phone out from his jean pockets before asking us to gaze into the past.</p>
 
           <p>Yet, had Apple's former CEO ever announced, "Our new device can make <em>and</em> receive calls," it might have gone over shockingly well in 2026.</p>
 
