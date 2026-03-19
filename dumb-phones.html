@@ -479,7 +479,7 @@
         </div>
       </div>
 
-      <h2>What's a 'Dumb Phone'?</h2>
+      <h2 id="whats-a-dumb-phone">What's a 'Dumb Phone'?</h2>
 
       <p>A dumb phone is just what it sounds like, though there are different types, and even a few different names they go by.</p>
 
@@ -510,7 +510,7 @@
         <figcaption>The Light Phone II — a minimalist 5G phone with a matte finish and e-ink display.</figcaption>
       </figure>
 
-      <h3>Hi-Tech Low Tech</h3>
+      <h3 id="hi-tech-low-tech">Hi-Tech Low Tech</h3>
 
       <p>The "<a href="#">Light Phone</a>" has been on the market for over nine years, yet has found an increasing level of adoption in recent years from the dumb phone faithful.</p>
 
@@ -532,7 +532,7 @@
 
       <p>That sentiment underscores the idea that dumb phone adoption is not always just an ethics-laden endeavor; there is an <em>enthusiastically</em> paying market for phones untangled from being everything-in-one devices. Many people aren't begrudgingly downgrading their phones, they're paying for the privilege.</p>
 
-      <h2>How Many People Currently Have Dumb Phones?</h2>
+      <h2 id="how-many-people">How Many People Currently Have Dumb Phones?</h2>
 
       <p>When thinking about dumb phone adoption, it's helpful to know that it's not as if the market share for mobile phones – in general – can technically go up.</p>
 
@@ -564,7 +564,7 @@
 
       <p>In fact, whatever people think of dumb phones, and whether or not they've personally purchased one, the umbrella search trend for people looking up the term "dumb phone" has roughly quadrupled over the past five years. Any way you slice the data, to make <em>any</em> dent within arguably the most prolific consumer device in human history is worth remarking over.</p>
 
-      <h2>These Are The People Trying To Help Themselves</h2>
+      <h2 id="people-helping-themselves">These Are The People Trying To Help Themselves</h2>
 
       <p>Nestled within the pinned post on the most popular subreddit for dumb phones (naturally titled "<a href="#">r/dumbphones</a>") sits a bold proclamation: "<a href="#">There is no perfect dumbphone.</a>"</p>
 
@@ -581,7 +581,7 @@
 
       <p>To date, Briones' associated <a href="#">dumb phone YouTube channel</a> currently has over 40,000 subscribers filled with videos helping people to get "dumber".</p>
 
-      <h2>The Young Quotient</h2>
+      <h2 id="the-young-quotient">The Young Quotient</h2>
 
       <p>Although the smartphone's biggest customer, one key demographic that's a part of driving this movement is in fact, younger Gen Z members.</p>
 
@@ -602,7 +602,7 @@
 
       <p>Considering all the above, the real wonder is not that dumb phones exist, but rather, at what rate they can be expected to grow.</p>
 
-      <h2>What Else Can You Do To Break Apart From Smartphones?</h2>
+      <h2 id="breaking-apart">What Else Can You Do To Break Apart From Smartphones?</h2>
 
       <p>One aspect of phone decoupling that gets spoken about less frequently, yet is fairly relevant to the dumb phone is the fact that by law, your rights to your telephone number itself <strong><a href="#">are protected under U.S. law</a></strong>. As more and more people <a href="#">are leaving major carriers</a> by the numbers, this fact has become key.</p>
 
@@ -627,7 +627,7 @@
 
       <p>For those who just need a break, or maybe aren't sure which dumb phone solution they want to try yet, phone numbers are able to be "parked", or reserved, allowing the flexibility to explore decoupling from technology at your own pace. The power to park a phone number is one of the best gateways to making a lifestyle switch, because you don't have to lose your phone number identity to try it.</p>
 
-      <h2>Maybe just, 'phone'</h2>
+      <h2 id="maybe-just-phone">Maybe just, 'phone'</h2>
 
       <p>The future of smartphones may not be related to how fast and multi-faceted they can become, afterall.</p>
 
@@ -685,14 +685,14 @@
       <div class="sidebar-widget">
         <div class="widget-head">In This Article</div>
         <div class="widget-body">
-          <ul class="toc-list">
-            <li><a href="#" class="active">What's a 'Dumb Phone'?</a></li>
-            <li><a href="#">Hi-Tech Low Tech</a></li>
-            <li><a href="#">How Many People Have Dumb Phones?</a></li>
-            <li><a href="#">People Trying to Help Themselves</a></li>
-            <li><a href="#">The Young Quotient</a></li>
-            <li><a href="#">Breaking Apart From Smartphones</a></li>
-            <li><a href="#">Maybe just, 'phone'</a></li>
+          <ul class="toc-list" id="toc-list">
+            <li><a href="#whats-a-dumb-phone">What's a 'Dumb Phone'?</a></li>
+            <li><a href="#hi-tech-low-tech">Hi-Tech Low Tech</a></li>
+            <li><a href="#how-many-people">How Many People Have Dumb Phones?</a></li>
+            <li><a href="#people-helping-themselves">People Trying to Help Themselves</a></li>
+            <li><a href="#the-young-quotient">The Young Quotient</a></li>
+            <li><a href="#breaking-apart">Breaking Apart From Smartphones</a></li>
+            <li><a href="#maybe-just-phone">Maybe just, 'phone'</a></li>
           </ul>
         </div>
       </div>
@@ -861,6 +861,45 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    /* ── TABLE OF CONTENTS ACTIVE STATE ── */
+    (function () {
+      const headingIds = [
+        'whats-a-dumb-phone',
+        'hi-tech-low-tech',
+        'how-many-people',
+        'people-helping-themselves',
+        'the-young-quotient',
+        'breaking-apart',
+        'maybe-just-phone'
+      ];
+
+      const tocLinks = {};
+      headingIds.forEach(id => {
+        const link = document.querySelector('#toc-list a[href="#' + id + '"]');
+        if (link) tocLinks[id] = link;
+      });
+
+      function setActive(id) {
+        Object.values(tocLinks).forEach(l => l.classList.remove('active'));
+        if (tocLinks[id]) tocLinks[id].classList.add('active');
+      }
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+      headingIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+
+      setActive('whats-a-dumb-phone');
+    })();
+  </script>
 
   <script>
   // ── PEW RESEARCH: Mobile phone ownership line chart ──────────────────────
