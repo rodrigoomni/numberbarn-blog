@@ -251,6 +251,37 @@
     .chart-canvas-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .chart-inner { min-width: 560px; position: relative; }
 
+    /* Mobile zoom controls — hidden on desktop */
+    .chart-zoom {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .chart-zoom-btn {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--navy);
+      font-size: 20px;
+      line-height: 1;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s, color .15s, border-color .15s;
+      user-select: none;
+    }
+    .chart-zoom-btn:active { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .chart-zoom-label { font-size: 11px; font-weight: 600; color: #9ca7b0; text-transform: uppercase; letter-spacing: 1.2px; }
+    @media (max-width: 768px) {
+      .chart-zoom { display: flex; }
+    }
+
     /* Drop cap */
     .intro-text p:first-child::first-letter {
       font-family: 'Lora', serif;
@@ -551,7 +582,12 @@
         <h4>Mobile Phone Ownership in the U.S.</h4>
         <p class="chart-sub">% of U.S. adults who say they own a cellphone vs. smartphone</p>
         <div class="chart-canvas-wrap">
-          <div class="chart-inner"><canvas id="pewChart"></canvas></div>
+          <div class="chart-inner" id="pewInner"><canvas id="pewChart"></canvas></div>
+        </div>
+        <div class="chart-zoom">
+          <button class="chart-zoom-btn" onclick="zoomChart('pewInner',-1)" aria-label="Zoom out">−</button>
+          <span class="chart-zoom-label">Zoom</span>
+          <button class="chart-zoom-btn" onclick="zoomChart('pewInner', 1)" aria-label="Zoom in">+</button>
         </div>
         <p class="chart-source">Source: Pew Research Center, Surveys of U.S. adults conducted 2002–2025. Note: vertical line indicates change in survey mode in 2023.</p>
       </div>
@@ -571,7 +607,12 @@
         <h4>Search Interest in "Dumb Phone" Over Time</h4>
         <p class="chart-sub">Google Trends index (0–100) — United States, past 5 years</p>
         <div class="chart-canvas-wrap">
-          <div class="chart-inner"><canvas id="trendsChart"></canvas></div>
+          <div class="chart-inner" id="trendsInner"><canvas id="trendsChart"></canvas></div>
+        </div>
+        <div class="chart-zoom">
+          <button class="chart-zoom-btn" onclick="zoomChart('trendsInner',-1)" aria-label="Zoom out">−</button>
+          <span class="chart-zoom-label">Zoom</span>
+          <button class="chart-zoom-btn" onclick="zoomChart('trendsInner', 1)" aria-label="Zoom in">+</button>
         </div>
         <p class="chart-source">Source: Google Trends, Web Search — United States, March 2021–March 2026.</p>
       </div>
@@ -603,7 +644,12 @@
         <h4>Indicators of Americans' Attachment to Their Smartphone, by Age</h4>
         <p class="chart-sub">Hover over bars to see exact percentages &mdash; Jan. 3–Feb. 18, 2022. Based on U.S. adults who own a smartphone.</p>
         <div class="chart-canvas-wrap">
-          <div class="chart-inner"><canvas id="gallupChart"></canvas></div>
+          <div class="chart-inner" id="gallupInner"><canvas id="gallupChart"></canvas></div>
+        </div>
+        <div class="chart-zoom">
+          <button class="chart-zoom-btn" onclick="zoomChart('gallupInner',-1)" aria-label="Zoom out">−</button>
+          <span class="chart-zoom-label">Zoom</span>
+          <button class="chart-zoom-btn" onclick="zoomChart('gallupInner', 1)" aria-label="Zoom in">+</button>
         </div>
         <p class="chart-source">Source: Gallup</p>
       </div>
@@ -873,6 +919,20 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    /* ── CHART ZOOM CONTROLS (mobile) ── */
+    function zoomChart(innerId, dir) {
+      const inner = document.getElementById(innerId);
+      const current = parseInt(inner.dataset.zoom) || 560;
+      const next = Math.min(1100, Math.max(380, current + dir * 140));
+      inner.dataset.zoom = next;
+      inner.style.width = next + 'px';
+      inner.style.minWidth = next + 'px';
+      const canvas = inner.querySelector('canvas');
+      if (canvas) { const chart = Chart.getChart(canvas); if (chart) chart.resize(); }
+    }
+  </script>
 
   <script>
     /* ── TABLE OF CONTENTS ACTIVE STATE ── */
