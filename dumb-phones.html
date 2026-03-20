@@ -109,6 +109,9 @@
       align-items: start;
     }
 
+    /* Prevent grid item from expanding to fit children's min-width */
+    .article-content { min-width: 0; }
+
     /* Article content typography */
     .article-content h2 {
       font-size: 22px; font-weight: 800; color: var(--navy);
