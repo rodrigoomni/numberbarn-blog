@@ -245,7 +245,8 @@
     .chart-wrap .chart-source {
       font-size: 11px; color: #b0bec8; margin-top: 14px; border-top: 1px solid var(--border); padding-top: 10px;
     }
-    .chart-canvas-wrap { position: relative; width: 100%; }
+    .chart-canvas-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .chart-inner { min-width: 560px; position: relative; }
 
     /* Drop cap */
     .intro-text p:first-child::first-letter {
@@ -547,7 +548,7 @@
         <h4>Mobile Phone Ownership in the U.S.</h4>
         <p class="chart-sub">% of U.S. adults who say they own a cellphone vs. smartphone</p>
         <div class="chart-canvas-wrap">
-          <canvas id="pewChart"></canvas>
+          <div class="chart-inner"><canvas id="pewChart"></canvas></div>
         </div>
         <p class="chart-source">Source: Pew Research Center, Surveys of U.S. adults conducted 2002–2025. Note: vertical line indicates change in survey mode in 2023.</p>
       </div>
@@ -567,7 +568,7 @@
         <h4>Search Interest in "Dumb Phone" Over Time</h4>
         <p class="chart-sub">Google Trends index (0–100) — United States, past 5 years</p>
         <div class="chart-canvas-wrap">
-          <canvas id="trendsChart"></canvas>
+          <div class="chart-inner"><canvas id="trendsChart"></canvas></div>
         </div>
         <p class="chart-source">Source: Google Trends, Web Search — United States, March 2021–March 2026.</p>
       </div>
@@ -599,7 +600,7 @@
         <h4>Indicators of Americans' Attachment to Their Smartphone, by Age</h4>
         <p class="chart-sub">Hover over bars to see exact percentages &mdash; Jan. 3–Feb. 18, 2022. Based on U.S. adults who own a smartphone.</p>
         <div class="chart-canvas-wrap">
-          <canvas id="gallupChart"></canvas>
+          <div class="chart-inner"><canvas id="gallupChart"></canvas></div>
         </div>
         <p class="chart-source">Source: Gallup</p>
       </div>
