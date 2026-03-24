@@ -397,7 +397,7 @@
 
       <p>The honest answer: it depends. But we can give you a much better answer than that. Here's a breakdown of timelines by scenario, plus what you can do to keep things moving.</p>
 
-      <h2>What Is Number Porting, Exactly?</h2>
+      <h2 id="what-is-porting">What Is Number Porting, Exactly?</h2>
       <p>Number porting is the process of transferring your phone number from one carrier (your current provider) to another (your new one). In the US, the FCC guarantees your right to keep your number when switching — this is called Local Number Portability (LNP). The new carrier initiates the request; the old carrier has to cooperate.</p>
 
       <div class="callout">
@@ -405,7 +405,7 @@
         <p><strong>Key fact:</strong> You must stay active with your current carrier until the port completes. Canceling your service early can result in your number being released into the wild — and losing it forever.</p>
       </div>
 
-      <h2>Typical Porting Timelines</h2>
+      <h2 id="porting-timelines">Typical Porting Timelines</h2>
       <p>Here's what to realistically expect depending on your situation:</p>
 
       <ul>
@@ -420,7 +420,7 @@
         <p>"The biggest delays we see aren't from the carriers — they're from customers who submit incorrect account info. Double-check everything before you submit."</p>
       </blockquote>
 
-      <h2>The 5-Step Porting Process</h2>
+      <h2 id="porting-process">The 5-Step Porting Process</h2>
       <p>Understanding each stage helps you know exactly where your port stands — and who to contact if it stalls.</p>
 
       <ol class="steps-list">
@@ -466,7 +466,7 @@
         </a>
       </div>
 
-      <h2>What Can Slow Down Your Port?</h2>
+      <h2 id="slow-down">What Can Slow Down Your Port?</h2>
       <p>Most port delays are preventable. Here are the most common culprits:</p>
       <ul>
         <li>Mismatched account name or billing address on the LOA</li>
@@ -477,7 +477,7 @@
         <li>Submitting on a Friday afternoon (ports often don't execute on weekends)</li>
       </ul>
 
-      <h2>Porting to NumberBarn for Parking</h2>
+      <h2 id="porting-to-numberbarn">Porting to NumberBarn for Parking</h2>
       <p>Parking is a specific use case where you port your number to NumberBarn not to make calls, but to <strong>hold onto it cheaply</strong> while you're in between services. This is popular with small business owners who are rebranding, individuals changing plans, or people who just don't want to lose a meaningful number.</p>
       <p>The porting process is identical to a regular port. Once complete, your number is safely stored in your NumberBarn account for as little as $2/month — no active service required.</p>
 
@@ -513,16 +513,16 @@
     <!-- SIDEBAR -->
     <aside class="article-sidebar">
 
-      <!-- Table of Contents -->
-      <div class="sidebar-widget">
+      <!-- Table of Contents (shown only when real jump links are present) -->
+      <div class="sidebar-widget" id="toc-widget" style="display:none">
         <div class="widget-head">In This Article</div>
         <div class="widget-body">
           <ul class="toc-list">
-            <li><a href="#" class="active">What Is Number Porting?</a></li>
-            <li><a href="#">Typical Porting Timelines</a></li>
-            <li><a href="#">The 5-Step Porting Process</a></li>
-            <li><a href="#">What Can Slow Down Your Port?</a></li>
-            <li><a href="#">Porting to NumberBarn</a></li>
+            <li><a href="#what-is-porting" class="active">What Is Number Porting?</a></li>
+            <li><a href="#porting-timelines">Typical Porting Timelines</a></li>
+            <li><a href="#porting-process">The 5-Step Porting Process</a></li>
+            <li><a href="#slow-down">What Can Slow Down Your Port?</a></li>
+            <li><a href="#porting-to-numberbarn">Porting to NumberBarn</a></li>
           </ul>
         </div>
       </div>
@@ -692,5 +692,19 @@
     </div>
   </footer>
 
+
+  <script>
+    /* TOC: show the widget only when at least one link points to a real anchor in the article */
+    (function () {
+      var widget = document.getElementById('toc-widget');
+      if (!widget) return;
+      var links = widget.querySelectorAll('.toc-list a[href]');
+      var hasJumpLink = Array.prototype.some.call(links, function (a) {
+        var href = a.getAttribute('href');
+        return href && href !== '#' && href.startsWith('#') && document.querySelector(href);
+      });
+      if (hasJumpLink) widget.style.display = '';
+    })();
+  </script>
 </body>
 </html>
